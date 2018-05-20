@@ -1,0 +1,60 @@
+{
+    "parameters": {
+        "name": {
+            "type": "string"
+        },
+        "storageName": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string"
+        },
+        "subscriptionId": {
+            "type": "string"
+        }
+    },
+    "resources": [
+        {
+            "apiVersion": "2016-03-01",
+            "name": "[parameters('name')]",
+            "type": "Microsoft.Web/sites",
+            "properties": {
+                "name": "[parameters('name')]",
+                "siteConfig": {
+                    "appSettings": [
+                        {
+                            "name": "AzureWebJobsDashboard",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageName'),';AccountKey=',listKeys(resourceId('909d1d1a-4f18-4130-bf86-de0e83f234a3','storage','Microsoft.Storage/storageAccounts', parameters('storageName')), '2015-05-01-preview').key1)]"
+                        },
+                        {
+                            "name": "AzureWebJobsStorage",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageName'),';AccountKey=',listKeys(resourceId('909d1d1a-4f18-4130-bf86-de0e83f234a3','storage','Microsoft.Storage/storageAccounts', parameters('storageName')), '2015-05-01-preview').key1)]"
+                        },
+                        {
+                            "name": "FUNCTIONS_EXTENSION_VERSION",
+                            "value": "beta"
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageName'),';AccountKey=',listKeys(resourceId('909d1d1a-4f18-4130-bf86-de0e83f234a3','storage','Microsoft.Storage/storageAccounts', parameters('storageName')), '2015-05-01-preview').key1)]"
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTSHARE",
+                            "value": "[concat(toLower(parameters('name')), 'ab3a')]"
+                        },
+                        {
+                            "name": "WEBSITE_NODE_DEFAULT_VERSION",
+                            "value": "6.5.0"
+                        }
+                    ]
+                },
+                "clientAffinityEnabled": false,
+                "reserved": false
+            },
+            "location": "West India",
+            "kind": "functionapp"
+        }
+    ],
+    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0"
+}

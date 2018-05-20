@@ -1,0 +1,18 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "value": "iqans-test-func1"
+        },
+        "storageName": {
+            "value": "iqansstorage"
+        },
+        "location": {
+            "value": "West India"
+        },
+        "subscriptionId": {
+            "value": "909d1d1a-4f18-4130-bf86-de0e83f234a3"
+        }
+    }
+}
